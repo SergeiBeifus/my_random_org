@@ -1,0 +1,37 @@
+{% extends "generate_password/base.html" %}
+
+{% block title %}GenPasswd{% endblock title %}
+
+{% block content %}
+    <form action="/" method="post">
+        {% csrf_token %}
+{#        {{ form.as_p }}#}
+        <fieldset>
+            <legend>Настройки генератора:</legend>
+            <label>
+                <input type="checkbox" name="use_nums" checked="checked" />
+                Цифры
+            </label><br/>
+            <label>
+                <input type="checkbox" name="use_caps" checked="checked" />
+                Прописные буквы
+            </label><br/>
+            <label>
+                <input type="checkbox" name="use_lower" checked="checked" />
+                Строчные буквы
+            </label><br/>
+            <label>
+                <input type="checkbox" name="use_special_symbols" />
+                Спец. символы %, *, ),?, @, #, $, ~
+            </label>
+            <br/>
+            <label>
+                Длина пароля:<input type="text" name="password_length" value="8" maxlength="3" size="5"/> - символов
+            </label>
+        </fieldset>
+        <input value="Создать пароль" type="submit"/>
+    </form>
+    {% for password in passwords %}
+        <p>{{ password }}</p>
+    {% endfor %}
+{% endblock content %}
